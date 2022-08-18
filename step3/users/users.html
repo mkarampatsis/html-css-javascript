@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Χρήστες - Σύστημα Ανακοινώσεων</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.html">Αρχική</a>
+                        <a class="nav-link active" aria-current="page" href="../index.html"><i class="fa fa-fw fa-home"></i>Αρχική</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -100,32 +101,30 @@
                     <option value="2">Μεταπτυχιακός</option>
                     <option value="3">ΔΕΠ</option>
                     <option value="4">ΕΔΙΠ</option>
-                </select><br>
+                </select>
             </div>
-            <div class="mb-3 form-check">
-                <label for="roles" class="form-label">Ρόλος</label><br>
-                <input type="radio"  class="form-check-input" name="roles" id="admin" value="admin">
-                <label for="admin" class="form-label">Διαχειριστής</label><br>
-                <input type="radio"  class="form-check-input" name="roles" id="editor" value="editor">
-                <label for="admin" class="form-label">Συγγραφέας</label><br>
-            </div>
-            
+                        
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>   
     
     <hr>
     
-    <div class="table-responsive">
-        <table class="table table-striped table-hover caption-top">
+    <!-- Η στοιχιση του πίνακα μπορεί να γίνει και με το σχολιασμένο style -->
+    <!-- .table {
+        margin: 0 auto;
+        width: 80%;
+    } -->
+    <div class="row justify-content-center">
+        <table class="table table-striped table-hover caption-top w-auto ">
             <caption>List of users</caption>
             <thead>
                 <tr>
-                    <th class="th-sm">Username</th>
-                    <th class="th-sm">Όνομα</th>
-                    <th class="th-sm">Επίθετο</th>
-                    <th class="th-sm">Κατηγορία</th>
-                    <th class="th-sm">Email</th>
+                    <th>Username</th>
+                    <th>Όνομα</th>
+                    <th>Επίθετο</th>
+                    <th>Κατηγορία</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
@@ -168,6 +167,8 @@
         </table>
     </div>
 
-    <p><a href="../index.html">Επιστροφή</a></p>
+    <div class="row row-cols-5 justify-content-center w">
+        <a class="btn btn-primary" href="../index.html">Επιστροφή</a>
+    </div>
 </body>
 </html>
