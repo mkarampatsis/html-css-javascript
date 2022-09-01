@@ -17,7 +17,7 @@ app.use(cors({
 
 app.get('/user/findAll', (req, res) => {
 
-    // console.log("Get users data");
+    console.log("Get users data");
 	
     fs.readFile('data.json', 'utf8', function (err, data) {
         if (err) throw err;
