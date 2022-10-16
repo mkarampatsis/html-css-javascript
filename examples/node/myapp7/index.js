@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: true}));
 
-app.use('/public', express.static('files'));
+app.use('/', express.static('files'));
 
 app.use('/userForm', (req, res) => {
 
@@ -16,6 +16,7 @@ app.use('/userForm', (req, res) => {
 	var sex = req.body.sex;
 	
 	res.send('Name: ' + firstname + ' Surname: ' + lastname + ' Email: ' + email + ' Sex:' + sex);
+	console.log(JSON.stringify(req.headers));
 });
 
 app.listen(3000, ()=> {

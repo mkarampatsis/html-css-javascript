@@ -60,15 +60,6 @@
             </div>
         </div>
     </nav>
-    <!-- <a href="https://aueb.gr/" target="_blank">
-        <img src="../../img/hermis_logo.jpg" alt="Οικονομικό Πανεπιστήμιο Αθηνών" width="50px" height="auto">
-    </a>
-    <a href="../index.html">
-        <img src="../../img/home-icon.png" alt="Οικονομικό Πανεπιστήμιο Αθηνών" width="30px" height="auto">
-    </a>
-    <a href="users.html">Χρήστες</a>
-    <a href="roles.html">Ρόλοι</a>
-    <a href="users-category.html">Κατηγορίες Χρηστών</a> -->
 
     <div class="container border bg-light py-3 my-3">
         <h2>Χρήστες Εφαρμογής</h2>
@@ -115,7 +106,7 @@
         </form>
         <div class="row">
             <div class="col text-center">
-                <button class="btn btn-primary text-center" onclick="insertORmodifyData()">Υποβολή</button>
+                <button class="btnSubmit btn btn-primary text-center">Υποβολή</button>
             </div>
         </div>    
     </div>   
@@ -140,7 +131,7 @@
                     <th>Διαδικασίες</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tbody"></tbody>
         </table>
     </div>
 
@@ -155,6 +146,110 @@
          
         $(document).ready(function(){
             getData();
+
+            $('#tbody').on('click', '.btnUpdate', function () {
+                
+                let btnValue = $(this);
+                let username = btnValue.val();
+
+                $.ajax({
+                    url:'http://localhost:3000/user/findOne'+ '?' + $.param({"username": username}),
+                    type:'get',
+                    dataType:'JSON'
+                })
+                .done(function(response){
+                    // console.log(">>", response);
+                    
+                    const data = response;
+                    
+                    $("#username").val(data.username);
+                    $("#username").prop( "disabled", true );
+                    $("#password").prop( "disabled", true );
+                    $("#name").val(data.name);
+                    $("#surname").val(data.surname);
+                    $("#category").val(data.category);
+                    $("#email").val(data.email);
+
+                    localStorage.setItem('updateUser', username);
+                });
+                
+            });
+
+            $('#tbody').on('click', '.btnDelete', function () {
+                let btnValue = $(this);
+                let username = btnValue.val();
+
+                $.ajax({
+                    url:'http://localhost:3000/user/delete'+ '?' + $.param({"username": username}),
+                    type:'delete',
+                    dataType:'JSON'
+                })
+                .done(function(response){
+                    // console.log(">>", response);
+                    
+                    const data = response.data
+                    
+                    createTbody(data)
+                });    
+            });
+            
+            $('.row').on('click', '.btnSubmit', function () {
+                var username = $("#username").val();
+                var name = $("#name").val();
+                var surname = $("#surname").val();
+                var category = $("#category option:selected").text();
+                var email = $("#email").val();
+
+                var item = {
+                    'username': username,
+                    'name': name,
+                    'surname': surname,
+                    'category': category,
+                    'email': email
+                }
+
+                const updateUser = localStorage.getItem('updateUser');
+
+                if (updateUser) {
+                    $.ajax({
+                        url: "http://localhost:3000/user/update",
+                        type: "post",
+                        data: item,
+                        dataType: "JSON",
+                        // encode: true,
+                    })
+                    .done(function(response) {
+                        // console.log(">>", response);
+                    
+                        const data = response.data
+                    
+                        createTbody(data)
+                        $("#username").prop( "disabled", false );
+                        $("#password").prop( "disabled", false );
+                        $('#myform')[0].reset();
+                        localStorage.removeItem('updateUser');
+                    });
+                } else {
+                    $.ajax({
+                        url: "http://localhost:3000/user/create",
+                        type: "post",
+                        data: item,
+                        dataType: "JSON",
+                        // encode: true,
+                    })
+                    .done(function(response) {
+                        // console.log(">>", response);
+                    
+                        const data = response.data
+                    
+                        createTbody(data)
+                        $('#myform')[0].reset();
+                        $("#username").prop( "disabled", false );
+                        $("#password").prop( "disabled", false );
+                    });
+                }
+            });
+            
         });
 
         function getData() {
@@ -172,77 +267,6 @@
             });
         }
 
-        function deleteData(username){
-            $.ajax({
-                url:'http://localhost:3000/user/delete'+ '?' + $.param({"username": username}),
-                type:'delete',
-                dataType:'JSON'
-            })
-            .done(function(response){
-                // console.log(">>", response);
-                
-                const data = response.data
-                
-                createTbody(data)
-            });    
-        };
-
-        function insertORmodifyData(){
-            var username = $("#username").val();
-            var name = $("#name").val();
-            var surname = $("#surname").val();
-            var category = $("#category option:selected").text();
-            var email = $("#email").val();
-
-            var item = {
-                'username': username,
-                'name': name,
-                'surname': surname,
-                'category': category,
-                'email': email
-            }
-
-            // console.log("item",item);
-            
-            if (username_to_change) {
-                $.ajax({
-                    url: "http://localhost:3000/user/update",
-                    type: "post",
-                    data: item,
-                    dataType: "JSON",
-                    // encode: true,
-                })
-                .done(function(response) {
-                     // console.log(">>", response);
-                
-                    const data = response.data
-                
-                    createTbody(data)
-                    $('#myform')[0].reset();
-                });
-
-                username_to_change = "";
-            } else {
-                $.ajax({
-                    url: "http://localhost:3000/user/create",
-                    type: "post",
-                    data: item,
-                    dataType: "JSON",
-                    // encode: true,
-                })
-                .done(function(response) {
-                     // console.log(">>", response);
-                
-                    const data = response.data
-                
-                    createTbody(data)
-                    $('#myform')[0].reset();
-                    $("#username").prop( "disabled", false );
-                    $("#password").prop( "disabled", false );
-                });
-            }
-        }
-        
         function createTbody(data){
 
             $("#userTable > tbody").empty();
@@ -265,36 +289,13 @@
                     "<td>" + category + "</td>" +
                     "<td>" + email + "</td>" +
                     "<td>" +
-                        "<button class='btn btn-primary' onclick='loadData(\""+username+"\")'>Τροποποίηση</button> " +
-                        "<button class='btn btn-primary' onclick='deleteData(\""+username+"\")'>Διαγραφή</button>" +
+                        "<button class='btnUpdate btn btn-primary' value=\'"+username+"\'>Τροποποίηση</button> " +
+                        "<button class='btnDelete btn btn-primary' value=\'"+username+"\'>Διαγραφή</button>" +
                     "</td>" + 
                     "</tr>";
 
                 $("#userTable tbody").append(tr_str);
             }
-        }
-
-        function loadData(username) {
-            $.ajax({
-                url:'http://localhost:3000/user/findOne'+ '?' + $.param({"username": username}),
-                type:'get',
-                dataType:'JSON'
-            })
-            .done(function(response){
-                // console.log(">>", response);
-                
-                const data = response;
-                
-                $("#username").val(data.username);
-                $("#username").prop( "disabled", true );
-                $("#password").prop( "disabled", true );
-                $("#name").val(data.name);
-                $("#surname").val(data.surname);
-                $("#category").val(data.category);
-                $("#email").val(data.email);
-
-                username_to_change = username;
-            });
         }
 
     </script> 

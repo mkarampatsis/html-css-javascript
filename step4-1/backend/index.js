@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 // Αρχικά χωρίς cors
 const cors = require('cors');
+
 app.use(cors({
     origin: '*'
     // origin: ['https://www.section.io', 'https://www.google.com/']

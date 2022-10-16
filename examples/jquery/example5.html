@@ -1,5 +1,5 @@
 <html>
-	<head><script src="jquery-3.4.1.min.js"></script></head>
+	<head><script src="jquery-3.6.1.min.js"></script></head>
 	<body>
 		<form>
 			<select name="country">
@@ -31,20 +31,20 @@
 				}
 			})
 			
-			var allChecked = [];
+			const allChecked = [];
 			
 			$('input:checkbox').change(function() {
-				var value = $(this).val();
+				let value = $(this).val();
 				if ($(this).prop('checked')){
 					allChecked.push(value)
 				}
 				else {
-					var index = allChecked.indexOf(value)
+					let index = allChecked.indexOf(value)
 					if (index !=-1)
 						allChecked.splice(index,1);
 				}
 				$('#belongings').html('');
-				for (var i=0; i<allChecked.length; i++) {
+				for (let i=0; i<allChecked.length; i++) {
 					$('#belongings').append(allChecked[i]);
 					if (i < allChecked.length - 1)
 						$('#belongings').append(', ');
@@ -52,11 +52,7 @@
 						$('#belongings').append(' ');
 				}
 			})
-			// http://api.jquery.com/change/
-			// http://api.jquery.com/prop/
-			
-			// https://www.w3schools.com/jsref/jsref_indexof.asp
-			// https://www.w3schools.com/jsref/jsref_splice.asp
+
 		</script>
 	</body>
 </html>

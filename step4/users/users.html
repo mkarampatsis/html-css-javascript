@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../scripts/controllers.js"></script>
     <title>Χρήστες - Σύστημα Ανακοινώσεων</title>
 </head>
 <body>
@@ -60,20 +61,11 @@
             </div>
         </div>
     </nav>
-    <!-- <a href="https://aueb.gr/" target="_blank">
-        <img src="../../img/hermis_logo.jpg" alt="Οικονομικό Πανεπιστήμιο Αθηνών" width="50px" height="auto">
-    </a>
-    <a href="../index.html">
-        <img src="../../img/home-icon.png" alt="Οικονομικό Πανεπιστήμιο Αθηνών" width="30px" height="auto">
-    </a>
-    <a href="users.html">Χρήστες</a>
-    <a href="roles.html">Ρόλοι</a>
-    <a href="users-category.html">Κατηγορίες Χρηστών</a> -->
 
     <div class="container border bg-light py-3 my-3">
         <h2>Χρήστες Εφαρμογής</h2>
 
-        <form>
+        <form id="frmUser">
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input type="text" class="form-control" name="username" id="username" aria-describedby="usernameHelp">
@@ -115,7 +107,8 @@
         </form>
         <div class="row">
             <div class="col text-center">
-                <button class="btn btn-primary text-center" onclick="insertData()">Υποβολή</button>
+                <button class="btnSubmit btn btn-primary text-center">Υποβολή</button>
+                <button class="btnReset btn btn-primary text-center">Καθάρισμα</button>
             </div>
         </div>    
     </div>   
@@ -140,162 +133,12 @@
                     <th>Διαδικασίες</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tbody"></tbody>
         </table>
     </div>
 
     <div class="row row-cols-5 justify-content-center w">
         <a class="btn btn-primary" href="../index.html">Επιστροφή</a>
     </div>
-
-    <script>
-        var data = [
-            { username: 'admin', name: 'admin1', surname: "admin1", category:"Διοικητικός", email:"admin1@aueb.gr" },
-            { username: 'xxxx1', name: 'Όνομα1', surname: "Επίθετο1", category:"Διοικητικός", email:"xxxx1@aueb.gr" },
-            { username: 'xxxx2', name: 'Όνομα2', surname: "Επίθετο2", category:"ΔΕΠ", email:"xxxx2@aueb.gr" },
-            { username: 'xxxx3', name: 'Όνομα3', surname: "Επίθετο3", category:"ΕΔΙΠ", email:"xxxx3@aueb.gr" },
-            { username: 'xxxx4', name: 'Όνομα4', surname: "Επίθετο4", category:"ΕΤΕΠ", email:"xxxx4@aueb.gr" }            
-        ];
-
-        var username_to_change = "" // empty is for create and with data for update 
-        // console.log(data);
- 
-        $(document).ready(function(){
-            
-            // Αρχικά γίνεται μέσα στο document function 
-            // var len = data.length;
-            // for (var i=0; i<len; i++){
-            //     var username = data[i].username;
-            //     var name = data[i].name;
-            //     var surname = data[i].surname;
-            //     var category = data[i].category;
-            //     var email = data[i].email;
-                
-            //     console.log(username, name);
-
-            //     var tr_str = "<tr>" +
-            //         "<td>" + username + "</td>" +
-            //         "<td>" + name + "</td>" +
-            //         "<td>" + surname + "</td>" +
-            //         "<td>" + category + "</td>" +
-            //         "<td>" + email + "</td>" +
-            //         "<td><button class='btn btn-primary' onclick='deleteData(\""+username+"\")'>Delete</button></td>";
-            //         "</tr>";
-
-            //     $("#userTable tbody").append(tr_str);
-            // }
-
-            // Στη συνέχεια δημιουργούμε την createTbody function    
-            createTbody(data)
-        });
-
-        function createTbody(data){
-
-            $("#userTable > tbody").empty();
-
-            // console.log(data);
-            var len = data.length;
-            for (var i=0; i<len; i++){
-                var username = data[i].username;
-                var name = data[i].name;
-                var surname = data[i].surname;
-                var category = data[i].category;
-                var email = data[i].email;
-                
-                // console.log(username, name);
-
-                var tr_str = "<tr>" +
-                    "<td>" + username + "</td>" +
-                    "<td>" + name + "</td>" +
-                    "<td>" + surname + "</td>" +
-                    "<td>" + category + "</td>" +
-                    "<td>" + email + "</td>" +
-                    "<td>" +
-                        "<button class='btn btn-primary' onclick='loadData(\""+username+"\")'>Τροποποίηση</button> " +
-                        "<button class='btn btn-primary' onclick='deleteData(\""+username+"\")'>Διαγραφή</button>" +
-                    "</td>" + 
-                    "</tr>";
-
-                $("#userTable tbody").append(tr_str);
-            }
-        }
-
-        function insertData(){
-            var username = $("#username").val();
-            var name = $("#name").val();
-            var surname = $("#surname").val();
-            var category = $("#category option:selected").text();
-            var email = $("#email").val();
-
-            var item = {
-                'username': username,
-                'name': name,
-                'surname': surname,
-                'category': category,
-                'email': email
-            }
-
-            // console.log("item",item);
-
-            if (username_to_change) {
-                
-                // const updatedOSArray = data.map(p =>
-                //     p.username === username_to_change
-                //     ? { ...p, name: 'Ubuntu' }
-                //     : p
-                // );
-
-                const items = data.map(obj => {
-                    if (obj.username === username_to_change) {
-                        return {...obj, name: name, surname: surname, category: category, email: email};
-                    }
-
-                    return obj;
-                });
-                
-                data = items;
-
-                username_to_change = "";
-            } else {
-                data.push(item);
-            }
-            
-            // console.log(data);
-            createTbody(data);
-        }
-
-        function deleteData(username){
-            
-            // Αρχικά δεν βάζουμε το empty σε τρίτη φάση το μεταφέρουμε στο createTbody()
-            // $("#userTable > tbody").empty();
-            
-            // console.log(username);
-            var items = data.filter(function(d) { 
-                return d.username !== username;  
-            });
-
-            // Αρχικά δεν βάζουμε το data = items για να δουμε τι συμβαίνει
-            data = items;
-
-            // console.log(items);
-            createTbody(items);
-        };
-
-        function loadData(username) {
-            item = data.find(x => x.username === username);
-            // console.log(item);
-
-            $("#username").val(item.username);
-            $("#username").prop( "disabled", true );
-            $("#password").prop( "disabled", true );
-            $("#name").val(item.name);
-            $("#surname").val(item.surname);
-            $("#category").val(item.category);
-            $("#email").val(item.email);
-
-            username_to_change = username;
-        }
-
-    </script> 
 </body>
 </html>

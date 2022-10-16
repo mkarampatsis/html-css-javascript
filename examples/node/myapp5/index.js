@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 
 app.use('/', (req, res) => {
+	// ?name=markos&surname=lalakis&age=23
 	var query = req.query;
 	console.log(query);
 	

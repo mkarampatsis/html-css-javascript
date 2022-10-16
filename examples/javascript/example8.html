@@ -1,14 +1,14 @@
 <html>
 	<head>
-		<title>Παράδειγμα 8</title>
+		<title>Παράδειγμα 7</title>
 		<script src="example8.js"></script>
 	</head>
 	<body>
 		<p>Παράδειγμα 7</p>
 		<p>
 			<script >
-			const menu_array = [];
-			const date_array = [];
+			var menu_array = [];
+			var date_array = [];
 			
 			for (let i in customers){ 
 				let orders = customers[i]['orders']
@@ -31,21 +31,12 @@
 					}
 				};
 			};
-
-			
 			console.log(menu_array);
 			console.log(date_array);
 			document.write(JSON.stringify(menu_array));
 			document.write("<br><br>");
 			document.write(JSON.stringify(date_array));
-			
-			document.write("<br><br>");
-			for (let x in menu_array) {
-				document.write(menu_array[x]['firstname']);
-				document.write("<br><br>");
-			}
 			</script>
 		</p>
 	</body>
-	
 </html>

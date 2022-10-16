@@ -1,8 +1,13 @@
 /* This is Customer.js */
-
 var mongoose = require('mongoose');
+require("dotenv").config();
 
-mongoose.connect('mongodb://localhost:27017/myapp',{ useNewUrlParser: true });
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology: true,useCreateIndex:true});
+const connection = mongoose.connection;
+connection.once("open", () => {
+	console.log("Connected Database Successfully");
+});
 
 var Schema = mongoose.Schema;
 

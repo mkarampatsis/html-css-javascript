@@ -12,10 +12,10 @@ app.use('/create', (req, res) => {
 
 app.use('/user', (req, res) => {
 
-	var firstname = req.body.firstname,
-	var lastname = req.body.lastname,
-	var email = req.body.email,
-	var sex = req.body.sex,
+	var firstname = req.body.firstname;
+	var lastname = req.body.lastname;
+	var email = req.body.email;
+	var sex = req.body.sex;
 	
 	res.render('user', {name:firstname, surname:lastname, mail:email, sex:sex});
 });

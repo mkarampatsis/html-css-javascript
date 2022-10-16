@@ -1,5 +1,5 @@
 <html>
-	<head><script src="jquery-3.4.1.min.js"></script></head>
+	<head><script src="jquery-3.6.1.min.js"></script></head>
 	<style>
 		.errorText{
 			color: red;
@@ -36,9 +36,8 @@
 		<script>
 			$("button[name='submit']").click(function() {
 				
-				var passwordField = $("input[name='password']");
-				var password = passwordField.val();
-				var isOkay = true;
+				let password = $("input[name='password']").val();
+				let isOkay = true;
 				
 				if (password.length < 10 ) {
 					isOkay = false;
@@ -47,7 +46,8 @@
 					$('#atLeast10Chars').hide();
 				}
 				
-				if (/\d/.test(password) == false) {
+				let pattern = /\d/;
+				if (pattern.test(password) == false) {
 					isOkay = false;
 					$('#needsNumber').show();
 				} else {
