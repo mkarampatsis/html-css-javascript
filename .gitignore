@@ -1,5 +1,4 @@
 # dependencies
 step4-1/backend/node_modules
 
-examples/node/myapp9/.env
-.env
+**/.env
