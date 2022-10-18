@@ -1,11 +1,11 @@
-//----- 1o Παράδειγμα-------------------
+//----- 1o Παράδειγμα  forEach -------------------
 // forEach() method calls a function (a callback function) once for each array element.
 const numbers = [45, 4, 9, 16, 25];
 numbers.forEach(function(x){
   console.log('tree: ' + x);
 });
 
-//----- 2o Παράδειγμα-------------------
+//----- 2o Παράδειγμα  MAP-------------------
 // The map() method creates a new array by performing a function on each array element.
 // The map() method does not execute the function for array elements without values.
 // The map() method does not change the original array
@@ -18,7 +18,7 @@ function myFunction(value, index, array) {
   return value * 2;
 }
 
-//----- 3o Παράδειγμα-------------------
+//----- 3o Παράδειγμα  filter -------------------
 // The filter() method creates a new array with array elements that pass a test
 const numbers3 = [45, 4, 9, 16, 25];
 const over18 = numbers3.filter(myFunction);
@@ -29,9 +29,9 @@ function myFunction(value) {
   return value > 18;
 } 
 
-//----- 4o Παράδειγμα-------------------
+//----- 4o Παράδειγμα  reduce -------------------
 // The reduce() method runs a function on each array element to produce (reduce it to) a single value.
-//The reduce() method works from left-to-right in the array. See also reduceRight()
+// The reduce() method works from left-to-right in the array. See also reduceRight()
 const numbers4 = [45, 4, 9, 16, 25];
 let sum = numbers4.reduce(myFunction);
 
@@ -44,7 +44,7 @@ function myFunction(total, value) {
 // The reduce() method can accept an initial value
 // let sum = numbers.reduce(myFunction, 100);
 
-//----- 5o Παράδειγμα-------------------
+//----- 5o Παράδειγμα every -------------------
 // The every() method checks if all array values pass a test
 const numbers5 = [45, 4, 9, 16, 25];
 let allOver18 = numbers5.every(myFunction);
@@ -55,7 +55,7 @@ function myFunction(value) {
   return value > 18;
 } 
 
-//----- 6o Παράδειγμα-------------------
+//----- 6o Παράδειγμα some -------------------
 // The some() method checks if some array values pass a test.
 const numbers6 = [45, 4, 9, 16, 25];
 let someOver18 = numbers6.some(myFunction);
@@ -66,21 +66,21 @@ function myFunction(value, index, array) {
   return value > 18;
 } 
 
-//----- 7o Παράδειγμα-------------------
+//----- 7o Παράδειγμα indexOf -------------------
 // The indexOf() method searches an array for an element value and returns its position
 const fruits = ["Apple", "Orange", "Apple", "Mango"];
 let position = fruits.indexOf("Apple");
 
 console.log(position);
 
-//----- 8o Παράδειγμα-------------------
+//----- 8o Παράδειγμα lastIndexOf-------------------
 // Array.lastIndexOf() is the same as Array.indexOf(), but returns the position of the last occurrence of the specified element.
 const fruits1 = ["Apple", "Orange", "Apple", "Mango"];
 let position1 = fruits1.lastIndexOf("Apple");
 
 console.log(position);
 
-//----- 9o Παράδειγμα-------------------
+//----- 9o Παράδειγμα find -------------------
 // The find() method returns the value of the first array element that passes a test function.
 const numbers7 = [4, 9, 16, 25, 29];
 let first1 = numbers7.find(myFunction);
@@ -91,7 +91,7 @@ function myFunction(value) {
   return value > 18;
 } 
 
-//----- 10o Παράδειγμα-------------------
+//----- 10o Παράδειγμα findIndex-------------------
 // The findIndex() method returns the index of the first array element that passes a test function.
 const numbers8 = [4, 9, 16, 25, 29];
 let first2 = numbers8.findIndex(myFunction);
@@ -128,7 +128,7 @@ for (let x of keys3) {
 
 console.log(text3);
 
-//----- 13o Παράδειγμα-------------------
+//----- 13o Παράδειγμα includes-------------------
 // Array.includes() allows us to check if an element is present in an array
 const fruits4 = ["Banana", "Orange", "Apple", "Mango"];
 
