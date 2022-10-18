@@ -6,9 +6,6 @@ app.use(bodyParser.urlencoded({ extended: true}));
 //set view engine to ejs
 app.set('view engine', 'ejs');
 
-//set upp public directory to serve static files
-app.use(express.static('public'));
-
 var Customer = require('./model/Customer.js');
 
 app.use('/createform', (req, res) => {
