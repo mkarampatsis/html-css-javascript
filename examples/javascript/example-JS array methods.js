@@ -36,7 +36,7 @@ cars.shift();
 //----- 6o Παράδειγμα-------------------
 // Adds a new element to an array (at the beginning), and "unshifts" older elements
 const cars = ["Saab", "Volvo", "BMW"];
-cars.shift("Toyota");
+cars.unshift("Toyota");
 // "Toyota", "Saab", "Volvo", "BMW"
 
 //----- 7o Παράδειγμα-------------------

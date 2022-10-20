@@ -8,13 +8,12 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true}));
 
 // Αρχικά χωρίς cors
-const cors = require('cors');
+// const cors = require('cors');
 
 app.use(cors({
     origin: '*'
     // origin: ['https://www.section.io', 'https://www.google.com/']
 }));
-
 
 app.get('/user/findAll', (req, res) => {
 

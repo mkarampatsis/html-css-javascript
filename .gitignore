@@ -3,3 +3,6 @@ examples/node/myapp9/*.env
 examples/node/myapp10/*.env
 
 step4-1/backend/node_modules
+
+step4-2/node_modules
+step4-2/*.env
