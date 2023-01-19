@@ -164,7 +164,7 @@ app.post('/user/update', (req, res) => {
         });
         
         json = {
-            "data": items
+          "data": items
         };
 
         newdata = JSON.stringify(json);
